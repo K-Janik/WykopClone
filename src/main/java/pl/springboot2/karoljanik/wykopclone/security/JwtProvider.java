@@ -12,8 +12,6 @@ import java.io.InputStream;
 import java.security.*;
 import java.security.cert.CertificateException;
 
-import static io.jsonwebtoken.Jwts.parserBuilder;
-
 @Service
 public class JwtProvider {
 
@@ -24,7 +22,7 @@ public class JwtProvider {
         try {
             keyStore = KeyStore.getInstance("JKS");
             InputStream resourceAsStream = getClass().getResourceAsStream("/wykopclone.jks");
-            keyStore.load(resourceAsStream, "key-storepassword".toCharArray());
+            keyStore.load(resourceAsStream, "secretpassword".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new WykopCloneException("Exception occurred while loading keystore");
         }
@@ -41,14 +39,14 @@ public class JwtProvider {
 
     private PrivateKey getPrivateKey() {
         try {
-            return (PrivateKey) keyStore.getKey("wykopclone", "key-storepassword".toCharArray());
+            return (PrivateKey) keyStore.getKey("wykopclone", "secretpassword".toCharArray());
         } catch(KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e){
             throw new WykopCloneException("Exception occurred");
         }
     }
 
     public boolean validateToken(String jwt) {
-        parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJwt(jwt);
+        Jwts.parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
         return true;
     }
 
@@ -61,10 +59,10 @@ public class JwtProvider {
     }
 
     public String getUsernameFromJwt(String token) {
-        Claims claims = parserBuilder()
+        Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getPublicKey())
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
 
         return claims.getSubject();
