@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +59,13 @@ public class AuthorizationService {
         mailService.sendMail(new AuthorizationMail(user.getEmail(),"Pleas activate your account","Thank you for joining to Wykop Clone community," +
                 "please click on the below url to activate your account : " +
                 "http://localhost:8080/api/auth/accountVerification/"+token));
+    }
+
+    public User getCurrentUser() {
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User)
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(principal.getUsername())
+                .orElseThrow(() ->new  UsernameNotFoundException("User with name - "+principal.getUsername()+" not found"));
     }
 
     private String generateVerificationToken(User user) {

@@ -23,6 +23,7 @@ public class JwtProvider {
             keyStore = KeyStore.getInstance("JKS");
             InputStream resourceAsStream = getClass().getResourceAsStream("/wykopclone.jks");
             keyStore.load(resourceAsStream, "secretpassword".toCharArray());
+            resourceAsStream.close();
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new WykopCloneException("Exception occurred while loading keystore");
         }

@@ -1,9 +1,10 @@
-package pl.springboot2.karoljanik.wykopclone.security;
+package pl.springboot2.karoljanik.wykopclone.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.springboot2.karoljanik.wykopclone.dto.TagDto;
+import pl.springboot2.karoljanik.wykopclone.exceptions.WykopCloneException;
 import pl.springboot2.karoljanik.wykopclone.model.Tag;
 import pl.springboot2.karoljanik.wykopclone.repository.TagRepository;
 
@@ -22,8 +23,8 @@ public class TagService {
 
     @Transactional
     public TagDto save(TagDto tagDto) {
-        Tag save= tagRepository.save(mapToTag(tagDto));
-        tagDto.setId(save.getId());
+        Tag tag= tagRepository.save(mapToTag(tagDto));
+        tagDto.setId(tag.getId());
         return tagDto;
 
     }
@@ -34,6 +35,12 @@ public class TagService {
                 .stream()
                 .map(this::mapToTagDto)
                 .collect(Collectors.toList());
+    }
+
+    public TagDto getTag(Long id) {
+        Tag tag = tagRepository.findById(id)
+                .orElseThrow(() -> new WykopCloneException("Tag not found with id: " + id));
+        return mapToTagDto(tag);
     }
 
     private TagDto mapToTagDto(Tag tag) {

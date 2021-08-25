@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.springboot2.karoljanik.wykopclone.dto.TagDto;
-import pl.springboot2.karoljanik.wykopclone.security.TagService;
+import pl.springboot2.karoljanik.wykopclone.service.TagService;
 
 import java.util.List;
 
@@ -22,8 +22,8 @@ public class TagController {
 
     @PostMapping
     public ResponseEntity<TagDto> createTag(@RequestBody TagDto tagDto) {
-       return ResponseEntity.status(HttpStatus.CREATED)
-               .body(tagService.save(tagDto));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(tagService.save(tagDto));
     }
 
     @GetMapping
@@ -31,5 +31,12 @@ public class TagController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(tagService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TagDto> getTag(@PathVariable Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(tagService.getTag(id));
     }
 }
