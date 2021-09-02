@@ -1,7 +1,16 @@
 package pl.springboot2.karoljanik.wykopclone.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "votes")
 public class Vote {
@@ -16,44 +25,4 @@ public class Vote {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
-
-    public Vote(Long voteId, VoteType voteType) {
-        this.voteId = voteId;
-        this.voteType = voteType;
-    }
-
-    public Vote() {
-    }
-
-    public Long getVoteId() {
-        return voteId;
-    }
-
-    public void setVoteId(Long voteId) {
-        this.voteId = voteId;
-    }
-
-    public VoteType getVoteType() {
-        return voteType;
-    }
-
-    public void setVoteType(VoteType voteType) {
-        this.voteType = voteType;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

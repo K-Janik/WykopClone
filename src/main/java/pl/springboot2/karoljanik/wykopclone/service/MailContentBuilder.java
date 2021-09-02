@@ -6,18 +6,18 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 @Service
-public class AuthorizationMailBuilder {
+public class MailContentBuilder {
 
     private final TemplateEngine templateEngine;
 
     @Autowired
-    public AuthorizationMailBuilder(TemplateEngine templateEngine) {
+    public MailContentBuilder(TemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
     }
 
     String build(String message) {
         Context context = new Context();
         context.setVariable("message", message);
-        return templateEngine.process("authorizationMail", context);
+        return templateEngine.process("mailTemplate", context);
     }
 }

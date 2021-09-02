@@ -15,4 +15,8 @@ public class PostDto {
     private String postName;
     private String url;
     private String description;
+    //new fields
+    private Integer voteCount;
+    private Integer commentCount;
+    private String duration;
 }

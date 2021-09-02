@@ -39,4 +39,18 @@ public class PostController {
                 .status(HttpStatus.OK)
                 .body(postService.getPost(id));
     }
+
+    @GetMapping("/by-tag/{tagId}")
+    public ResponseEntity<List<PostDto>> getPostsByTag(@PathVariable Long tagId) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(postService.getPostsByTag(tagId));
+    }
+
+    @GetMapping("/by-user/{username}")
+    public ResponseEntity<List<PostDto>> getPostsByUsername(@PathVariable String username) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(postService.getPostsByUsername(username));
+}
 }

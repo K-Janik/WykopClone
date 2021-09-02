@@ -16,12 +16,12 @@ public class MailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
     private final JavaMailSender javaMailSender;
-    private final AuthorizationMailBuilder authorizationMailBuilder;
+    private final MailContentBuilder mailContentBuilder;
 
     @Autowired
-    public MailService(JavaMailSender javaMailSender, AuthorizationMailBuilder authorizationMailBuilder) {
+    public MailService(JavaMailSender javaMailSender, MailContentBuilder mailContentBuilder) {
         this.javaMailSender = javaMailSender;
-        this.authorizationMailBuilder = authorizationMailBuilder;
+        this.mailContentBuilder = mailContentBuilder;
     }
 
     @Async
@@ -30,7 +30,7 @@ public class MailService {
         message.setFrom("wykopclone@email.com");
         message.setTo(authorizationMail.getTo());
         message.setSubject(authorizationMail.getSubject());
-        message.setText(authorizationMailBuilder.build(authorizationMail.getText()));
+        message.setText(mailContentBuilder.build(authorizationMail.getText()));
         try {
             javaMailSender.send(message);
             LOGGER.info("Activation mail sent!");
