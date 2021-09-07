@@ -11,6 +11,7 @@ import pl.springboot2.karoljanik.wykopclone.repository.TagRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class TagService {
 
