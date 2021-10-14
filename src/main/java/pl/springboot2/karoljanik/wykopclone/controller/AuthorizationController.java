@@ -26,7 +26,7 @@ public class AuthorizationController {
         this.refreshTokenService = refreshTokenService;
     }
 
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
         authorizationService.signup(registerRequest);
         return new ResponseEntity<>("User registration successful", HttpStatus.CREATED);
