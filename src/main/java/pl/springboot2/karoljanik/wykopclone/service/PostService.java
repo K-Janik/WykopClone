@@ -87,6 +87,7 @@ public class PostService {
                 .tagName(post.getTag().getTagName())
                 .postName(post.getPostName())
                 .url(post.getUrl())
+                .userName(post.getUser().getUsername())
                 .description(post.getDescription())
                 .voteCount(post.getVoteCount())
                 .commentCount(commentRepository.findByPost(post).size())
