@@ -23,7 +23,7 @@ public class VoteController {
 
     @PostMapping
     public ResponseEntity<Void> vote(@RequestBody VoteDto voteDto) {
-        voteService.save(voteDto);
+        voteService.vote(voteDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

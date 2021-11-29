@@ -14,7 +14,6 @@ import java.util.Optional;
 
 import static pl.springboot2.karoljanik.wykopclone.model.VoteType.UPVOTE;
 
-@Transactional
 @Service
 public class VoteService {
 
@@ -28,8 +27,8 @@ public class VoteService {
         this.postRepository = postRepository;
         this.authorizationService = authorizationService;
     }
-
-    public void save(VoteDto voteDto) {
+    @Transactional
+    public void vote(VoteDto voteDto) {
         Post post = postRepository.findById(voteDto.getPostId())
                 .orElseThrow(() -> new WykopCloneException("Post with ID - " + voteDto.getPostId() + " not found"));
         Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authorizationService.getCurrentUser());
@@ -43,13 +42,14 @@ public class VoteService {
         } else {
             post.setVoteCount(post.getVoteCount() - 1);
         }
-        voteRepository.save(mapToVote(voteDto));
+        voteRepository.save(mapToVote(voteDto, post));
         postRepository.save(post);
     }
 
-    private Vote mapToVote(VoteDto voteDto) {
+    private Vote mapToVote(VoteDto voteDto, Post post) {
         return Vote.builder()
                 .voteType(voteDto.getVoteType())
+                .post(post)
                 .user(authorizationService.getCurrentUser())
                 .build();
     }

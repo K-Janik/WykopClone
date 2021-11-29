@@ -1,5 +1,6 @@
 package pl.springboot2.karoljanik.wykopclone.service;
 
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,7 +60,7 @@ public class CommentService {
     private CommentDto mapToCommentDto(Comment comment) {
         return CommentDto.builder().id(comment.getId())
                 .postId(comment.getPost().getPostId())
-                .createdDate(comment.getCreatedDate())
+                .createdDate(TimeAgo.using(comment.getCreatedDate().toEpochMilli()))
                 .text(comment.getText())
                 .userName(comment.getUser().getUsername())
                 .build();

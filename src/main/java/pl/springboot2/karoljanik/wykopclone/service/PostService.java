@@ -6,16 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.springboot2.karoljanik.wykopclone.dto.PostDto;
 import pl.springboot2.karoljanik.wykopclone.exceptions.WykopCloneException;
-import pl.springboot2.karoljanik.wykopclone.model.Post;
-import pl.springboot2.karoljanik.wykopclone.model.Tag;
-import pl.springboot2.karoljanik.wykopclone.model.User;
-import pl.springboot2.karoljanik.wykopclone.repository.CommentRepository;
-import pl.springboot2.karoljanik.wykopclone.repository.PostRepository;
-import pl.springboot2.karoljanik.wykopclone.repository.TagRepository;
-import pl.springboot2.karoljanik.wykopclone.repository.UserRepository;
+import pl.springboot2.karoljanik.wykopclone.model.*;
+import pl.springboot2.karoljanik.wykopclone.repository.*;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -27,14 +23,18 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
+    private final VoteRepository voteRepository;
 
     @Autowired
-    public PostService(TagRepository tagRepository, AuthorizationService authorizationService, PostRepository postRepository, CommentRepository commentRepository, UserRepository userRepository) {
+    public PostService(TagRepository tagRepository, AuthorizationService authorizationService,
+                       PostRepository postRepository, CommentRepository commentRepository,
+                       UserRepository userRepository, VoteRepository voteRepository) {
         this.tagRepository = tagRepository;
         this.authorizationService = authorizationService;
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
+        this.voteRepository = voteRepository;
     }
 
     public void save(PostDto postDto) {
@@ -92,6 +92,8 @@ public class PostService {
                 .voteCount(post.getVoteCount())
                 .commentCount(commentRepository.findByPost(post).size())
                 .duration(TimeAgo.using(post.getCreateDate().toEpochMilli()))
+                .upVote(checkVoteType(post, VoteType.UPVOTE))
+                .downVote(checkVoteType(post, VoteType.DOWNVOTE))
                 .build();
     }
 
@@ -102,5 +104,14 @@ public class PostService {
                 .createDate(Instant.now())
                 .voteCount(0)
                 .build();
+    }
+
+    private boolean checkVoteType(Post post, VoteType voteType) {
+        if (authorizationService.isLoggedIn()) {
+            Optional<Vote> voteForPostByUser =
+                    voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authorizationService.getCurrentUser());
+            return voteForPostByUser.filter(vote -> vote.getVoteType().equals(voteType)).isPresent();
+        }
+        return false;
     }
 }
