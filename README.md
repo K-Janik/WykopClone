@@ -21,7 +21,7 @@ is coded in Angular CLI with Bootstrap framework.
 - Login API using JWT Authentication (JSON Web Token);
 - AsymmetricEncryption using Java Keystore;
 - Refresh Token;
-- Adding posts (only for signed users);
-- Adding tags (only for signed users);
-- Adding comments (only for signed users);
-- Voting only for signed users;
+- Adding posts (only for signed Users);
+- Adding tags (only for signed Users);
+- Adding comments (only for signed Users);
+- Voting only for signed Users;
