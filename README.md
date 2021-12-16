@@ -15,7 +15,6 @@ is coded in Angular CLI with Bootstrap framework.
 - Lombok;
 - Angular CLI - version 11.2.13;
 - Bootstrap 5;
--
 
 ## Features
 - New user registration activated via email;
