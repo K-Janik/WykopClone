@@ -19,7 +19,7 @@ is coded in Angular CLI with Bootstrap framework.
 
 ## Features
 - New user registration activated via email;
-- Login API using JWT Authentication;
+- Login API using JWT Authentication (JSON Web Token);
 - AsymmetricEncryption using Java Keystore;
 - Refresh Token;
 - Adding posts (only for signed users);
