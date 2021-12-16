@@ -30,7 +30,8 @@ public class MailService {
         message.setFrom("wykopclone@email.com");
         message.setTo(authorizationMail.getTo());
         message.setSubject(authorizationMail.getSubject());
-        message.setText(mailContentBuilder.build(authorizationMail.getText()));
+//        message.setText(mailContentBuilder.build(authorizationMail.getText()));
+        message.setText(authorizationMail.getText());
         try {
             javaMailSender.send(message);
             LOGGER.info("Activation mail sent!");
