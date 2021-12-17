@@ -17,7 +17,7 @@ is coded in Angular CLI with Bootstrap framework.
 - Bootstrap 5;
 
 ## Features
-- New user registration activated via email;
+- New User registration activated via email;
 - Login API using JWT Authentication (JSON Web Token);
 - AsymmetricEncryption using Java Keystore;
 - Refresh Token;
@@ -25,3 +25,4 @@ is coded in Angular CLI with Bootstrap framework.
 - Adding tags (only for signed Users);
 - Adding comments (only for signed Users);
 - Voting only for signed Users;
+- Email notification about comment on User post;
