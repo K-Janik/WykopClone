@@ -4,7 +4,9 @@
 is coded in Angular CLI with Bootstrap framework.
 
 ## Video:
-Click image below to see video demo! 
+```diff
+-Click image below to see video demo! 
+```
 [![Watch the video](https://imgupload.pl/images/2021/12/18/WykopClone.png)](https://streamable.com/tzuwrl)
 
 ## Technologies Used
