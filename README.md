@@ -3,6 +3,9 @@
 > This is a clone of popular polish community website Wykop.pl. Application is using different Spring Technologies (listed below) for backend layer. Frontend side 
 is coded in Angular CLI with Bootstrap framework.
 
+## Video:
+[![Watch the video](https://imgupload.pl/images/2021/12/18/WykopClone.md.png)](https://streamable.com/tzuwrl)
+
 ## Technologies Used
 - Spring Boot 2 - version 2.5.3;
 - Spring Web;
