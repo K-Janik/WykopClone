@@ -4,6 +4,7 @@
 is coded in Angular CLI with Bootstrap framework.
 
 ## Video:
+Click to see video demo!
 [![Watch the video](https://imgupload.pl/images/2021/12/18/WykopClone.md.png)](https://streamable.com/tzuwrl)
 
 ## Technologies Used
