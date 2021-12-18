@@ -5,7 +5,7 @@ is coded in Angular CLI with Bootstrap framework.
 
 ## Video:
 Click to see video demo! -->
-[![Watch the video](https://imgupload.pl/zdjecie/xHJWH)](https://streamable.com/tzuwrl)
+[![Watch the video](https://imgupload.pl/images/2021/12/18/WykopClone.png)](https://streamable.com/tzuwrl)
 
 ## Technologies Used
 - Spring Boot 2 - version 2.5.3;
