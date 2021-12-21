@@ -65,7 +65,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostDto> getPostsByTag(Long tagId) {
         Tag tag = tagRepository.findById(tagId)
-                .orElseThrow(() -> new WykopCloneException(tagId.toString()));
+                .orElseThrow(() -> new WykopCloneException("No tag with id: " + tagId.toString()));
         List<Post> posts = postRepository.findAllByTag(tag);
         return posts.stream()
                 .map(this::mapToPostDto)
@@ -75,7 +75,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostDto> getPostsByUsername(String username) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new WykopCloneException(username));
+                .orElseThrow(() -> new WykopCloneException("No "+username+" in database"));
         return postRepository.findByUser(user)
                 .stream()
                 .map(this::mapToPostDto)
