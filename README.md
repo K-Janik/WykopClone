@@ -15,6 +15,8 @@ is coded in Angular CLI with Bootstrap framework.
 - Spring Secutity with JWT Authentication (JSON Web Token);
 - Java Keystore;
 - Spring Data JPA- Hibernate;
+- Unit Tests;
+- Integration Tests;  
 - PostgreSQL;
 - DockerDB;
 - DTO Pattern;

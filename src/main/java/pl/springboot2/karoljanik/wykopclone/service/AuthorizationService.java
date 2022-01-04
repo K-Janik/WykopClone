@@ -49,7 +49,7 @@ public class AuthorizationService {
     }
 
     @Transactional
-    public void signup(RegisterRequest registerRequest) {
+    public void registerAccount(RegisterRequest registerRequest) {
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));

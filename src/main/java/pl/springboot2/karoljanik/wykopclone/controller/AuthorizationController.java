@@ -28,7 +28,7 @@ public class AuthorizationController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
-        authorizationService.signup(registerRequest);
+        authorizationService.registerAccount(registerRequest);
         return new ResponseEntity<>("User registration successful", HttpStatus.CREATED);
     }
 
